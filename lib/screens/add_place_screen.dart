@@ -27,8 +27,9 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       decoration: InputDecoration(labelText: 'Title'),
                       controller: _titleController,
                     ),
-                    TextField(),
-                    TextField(),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ),
