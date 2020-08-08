@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,6 +18,13 @@ class _ImageInputState extends State<ImageInput> {
       source: ImageSource.camera,
       maxWidth: 600,
     );
+    setState(() {
+      _stroredImage = File(imageFile.path);
+    });
+
+    final appDir = await syspaths.getApplicationDocumentsDirectory();
+    final fileName  =  path.basename(imageFile.path);
+    final saved_image = await imageFile.copy('${appDir.path}/$fileName');
   }
 
   @override
@@ -53,9 +62,7 @@ class _ImageInputState extends State<ImageInput> {
             'Take a picture',
           ),
           textColor: Theme.of(context).primaryColor,
-          onPressed: () {
-            _takePicture;
-          },
+          onPressed: _takePicture,
         ))
       ],
     );
